@@ -1,13 +1,25 @@
 package calculator.challenge;
 
+import calculator.challenge.operator.ReversableOperator;
+
 /**
- * Created by timonewton on 6/2/17.
+ * Created by timonewton on 6/1/17.
  */
-public interface Operation {
+public class Operation{
+    Integer intOperand;
+    ReversableOperator currOperator;
 
-    //performs the operation on the passed parameter
-    public Integer doOperation(Integer initialVal);
 
-    //does the reverse of the defined operation on the passed parameter
-    public Integer reverseOperation(Integer initialVal);
+    public Operation(Integer intOperand, ReversableOperator currOperator) {
+        this.intOperand = intOperand;
+        this.currOperator = currOperator;
+    }
+
+    public Integer doOperation(Integer initialVal){
+        return currOperator.applyAsInt(initialVal, intOperand);
+    }
+
+    public Integer reverseOperation(Integer initialVal){
+        return currOperator.reverseAsInt(initialVal, intOperand);
+    }
 }

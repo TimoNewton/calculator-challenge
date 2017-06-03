@@ -1,20 +1,49 @@
 package calculator.challenge;
 
-import calculator.challenge.impl.SimpleOperation;
+import calculator.challenge.operator.ReversableOperator;
 
-/**
- * Created by timonewton on 6/2/17.
- */
-public interface Calculator {
-    //calculate an currOperation where both operands are provided.
-    public Integer doOperation(SimpleOperation.operation operation, Integer op1, Integer op2);
+import java.util.Stack;
 
-    //calculate and currOperation where only the second operand is provided
-    public Integer doOperation(SimpleOperation.operation operation, Integer op2);
+public class Calculator {
 
-    //undo the last currOperation done.  If there are no operations to undo, returns 0
-    public Integer undoOperation();
+    public Integer getCurrentValue() {
+        return currentValue;
+    }
 
-    //redo the last currOperation that was undone.  If there are no undone operations, keeps state as is
-    public Integer redoOperation();
+    public void setCurrentValue(Integer currentValue) {
+        this.currentValue = currentValue;
+    }
+
+    Integer currentValue=0;
+
+    Stack<Operation> operationHistory = new Stack<Operation>();
+    Stack<Operation> undoHistory = new Stack<Operation>();
+
+    //calculate and operation where only the second operand is provided
+    public Integer doOperation(ReversableOperator operation, Integer op2){
+        Operation currentOperation = new Operation(op2, operation);
+        currentValue = currentOperation.doOperation(currentValue);
+        operationHistory.push(currentOperation);
+        undoHistory.clear();
+        return currentValue;
+    }
+
+    public Integer undoOperation(){
+        if(!operationHistory.isEmpty()) {
+            Operation currentOperation = operationHistory.pop();
+            currentValue = currentOperation.reverseOperation(currentValue);
+            undoHistory.push(currentOperation);
+        }
+        return currentValue;
+    }
+
+    public Integer redoOperation(){
+        if(!undoHistory.isEmpty()) {
+            Operation currentOperation = undoHistory.pop();
+            currentValue = currentOperation.doOperation(currentValue);
+            operationHistory.push(currentOperation);
+        }
+        return currentValue;
+    }
+
 }

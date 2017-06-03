@@ -1,4 +1,4 @@
-package calculator.challenge;
+package calculator.challenge.operator;
 
 import java.util.function.IntBinaryOperator;
 
@@ -9,4 +9,7 @@ public interface ReversableOperator extends IntBinaryOperator {
 
     //does the reverse operation of the basic application
     public int reverseAsInt(int left, int right);
+
+    //get the symbol
+    public String getSymbol();
 }

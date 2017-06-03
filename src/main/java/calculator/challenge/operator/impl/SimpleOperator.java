@@ -1,8 +1,6 @@
-package calculator.challenge.impl;
+package calculator.challenge.operator.impl;
 
-import calculator.challenge.ReversableOperator;
-
-import java.util.function.IntBinaryOperator;
+import calculator.challenge.operator.ReversableOperator;
 
 /**
  * Created by timonewton on 6/2/17.
@@ -55,6 +53,7 @@ public enum SimpleOperator implements ReversableOperator {
         this.symbol = symbol;
     }
 
+    @Override
     public String getSymbol() {
         return symbol;
     }

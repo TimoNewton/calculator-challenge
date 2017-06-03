@@ -1,6 +1,6 @@
-package calculator.challenge.impl;
+package calculator.challenge.operator.impl;
 
-import calculator.challenge.ReversableOperator;
+import calculator.challenge.operator.ReversableOperator;
 
 import java.util.function.IntBinaryOperator;
 
@@ -23,6 +23,7 @@ public enum LambdaOperator implements ReversableOperator {
         this.reverseBinaryOperator = reverseBinaryOperator;
     }
 
+    @Override
     public String getSymbol() {
         return symbol;
     }
