@@ -4,7 +4,7 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = 'calculator.challenge.Calculator'
+mainClassName = 'calculator.challenge.Application'
 
 sourceCompatibility = 1.8
 
@@ -17,6 +17,6 @@ dependencies {
 }
 
 jar {
-    baseName = 'calculator'
+    baseName = 'calculator-challenge'
     version='0.1.0'
 }

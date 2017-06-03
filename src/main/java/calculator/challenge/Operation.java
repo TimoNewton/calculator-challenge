@@ -1,39 +1,13 @@
 package calculator.challenge;
 
 /**
- * Created by timonewton on 6/1/17.
+ * Created by timonewton on 6/2/17.
  */
-public class Operation {
-    Integer operand1;
-    Integer operand2;
-    Calculator.operations operation;
+public interface Operation {
 
-    public Operation(Integer operand1, Integer operand2, Calculator.operations operation) {
-        this.operand1 = operand1;
-        this.operand2 = operand2;
-        this.operation = operation;
-    }
+    //performs the operation on the passed parameter
+    public Integer doOperation(Integer initialVal);
 
-    public Integer doOperation(){
-        Integer returnInt = null;
-        switch(operation){
-            case ADDITION:
-                returnInt = operand1.intValue() + operand2.intValue();
-                break;
-            case MULTIPLICATION:
-                returnInt = operand1.intValue() * operand2.intValue();
-                break;
-            case DIVISION:
-                returnInt = operand1.intValue() / operand2.intValue();
-                break;
-            case SUBTRACTION:
-                returnInt = operand1.intValue() - operand2.intValue();
-                break;
-        }
-        return returnInt;
-    }
-
-    public Integer reverseOperation(){
-        return operand1;
-    }
+    //does the reverse of the defined operation on the passed parameter
+    public Integer reverseOperation(Integer initialVal);
 }

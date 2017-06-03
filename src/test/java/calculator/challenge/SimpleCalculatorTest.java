@@ -1,5 +1,7 @@
 package calculator.challenge;
 
+import calculator.challenge.impl.SimpleCalculator;
+import calculator.challenge.impl.SimpleOperation;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -7,35 +9,35 @@ import static org.junit.Assert.*;
 /**
  * Created by timonewton on 6/2/17.
  */
-public class CalculatorTest {
+public class SimpleCalculatorTest {
 
     @Test
     public void doOperation() throws Exception {
-        Calculator calc = new Calculator();
-        assertTrue("Calculator did not initialise with value 0", 0 == calc.getCurrentValue());
-        assertEquals("Incorrect addition", 3, calc.doOperation(Calculator.operations.ADDITION,1,2).intValue());
+        SimpleCalculator calc = new SimpleCalculator();
+        assertTrue("SimpleCalculator did not initialise with value 0", 0 == calc.getCurrentValue());
+        assertEquals("Incorrect addition", 3, calc.doOperation(SimpleOperation.operation.ADDITION,1,2).intValue());
         assertTrue("current value incorrectly updated to "+calc.getCurrentValue(), 3 == calc.getCurrentValue());
     }
 
     @Test
     public void doOperation1() throws Exception {
-        Calculator calc = new Calculator();
-        assertTrue("Calculator did not initialise with value 0", 0 == calc.getCurrentValue());
-        assertEquals("Incorrect addition",2, calc.doOperation(Calculator.operations.ADDITION,2).intValue());
+        SimpleCalculator calc = new SimpleCalculator();
+        assertTrue("SimpleCalculator did not initialise with value 0", 0 == calc.getCurrentValue());
+        assertEquals("Incorrect addition",2, calc.doOperation(SimpleOperation.operation.ADDITION,2).intValue());
         assertTrue("current value incorrectly updated to "+calc.getCurrentValue(), 2 == calc.getCurrentValue());
-        assertEquals("Incorrect addition", 12,calc.doOperation(Calculator.operations.MULTIPLICATION,6).intValue());
+        assertEquals("Incorrect addition", 12,calc.doOperation(SimpleOperation.operation.MULTIPLICATION,6).intValue());
         assertTrue("current value incorrectly updated to "+calc.getCurrentValue(), 12 == calc.getCurrentValue());
     }
 
     @Test
     public void undoAndRedoOperation() throws Exception {
-        Calculator calc = new Calculator();
-        assertTrue("Calculator did not initialise with value 0", 0 == calc.getCurrentValue());
-        assertEquals("Incorrect addition",2, calc.doOperation(Calculator.operations.ADDITION,2).intValue());
+        SimpleCalculator calc = new SimpleCalculator();
+        assertTrue("SimpleCalculator did not initialise with value 0", 0 == calc.getCurrentValue());
+        assertEquals("Incorrect addition",2, calc.doOperation(SimpleOperation.operation.ADDITION,2).intValue());
         assertTrue("current value incorrectly updated to "+calc.getCurrentValue(), 2 == calc.getCurrentValue());
-        assertEquals("Incorrect multiplication", 12, calc.doOperation(Calculator.operations.MULTIPLICATION,6).intValue());
+        assertEquals("Incorrect multiplication", 12, calc.doOperation(SimpleOperation.operation.MULTIPLICATION,6).intValue());
         assertTrue("current value incorrectly updated to "+calc.getCurrentValue(), 12 == calc.getCurrentValue());
-        //After setup, now undoing operation
+        //After setup, now undoing currOperation
         assertEquals("undo of  2 * 6 was incorrect", 2, calc.undoOperation().intValue());
         assertTrue("current value incorrectly updated to "+calc.getCurrentValue(), 2 == calc.getCurrentValue());
         assertEquals("undo of  0 + 2  was incorrect",0, calc.undoOperation().intValue());
@@ -48,10 +50,10 @@ public class CalculatorTest {
         assertEquals("Incorrect redo of multiplication", 12, calc.redoOperation().intValue());
         assertTrue("current value incorrectly updated to "+calc.getCurrentValue(), 12 == calc.getCurrentValue());
         assertEquals("redo of  empty history  was incorrect", calc.redoOperation().intValue(),12);
-        //undo twice, then do a new operation, then test that there is nothing to redo
+        //undo twice, then do a new currOperation, then test that there is nothing to redo
         calc.undoOperation();
         calc.undoOperation();
-        calc.doOperation(Calculator.operations.ADDITION,36);
+        calc.doOperation(SimpleOperation.operation.ADDITION,36);
         assertEquals("second addition incorrect", calc.getCurrentValue().intValue(),36);
         assertEquals("redo of  empty history  was incorrect", calc.redoOperation().intValue(),36);
 
